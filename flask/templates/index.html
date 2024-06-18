@@ -1,0 +1,140 @@
+{% extends "app.html" %}
+
+{% block title %}
+
+	<title>TaskLogger | Home</title>
+
+{% endblock %}
+
+{% block body %}
+
+	<nav>
+		<div class="center">
+			<a href="{{ url_for('index') }}" title="TaskLogger">
+				<img src="{{ url_for('static', filename = 'locales/images/adhrin_transparent.png') }}" alt="tasklogger_logo">
+			</a>
+		</div>
+
+		<div class="right">
+			<svg class="menu-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" viewBox="0 0 24 24">
+				<title>Menu</title>
+				<path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14"/>
+			</svg>
+		</div>
+
+		<div class="menu">
+			<a class="open-form-add-task" title="Add a new task">
+				<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" viewBox="0 0 24 24">
+					<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+				</svg>
+				Add Task
+			</a>
+			<a class="show-active-task" title="Show active tasks">
+				<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" viewBox="0 0 24 24">
+					<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7h1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h11.5M7 14h6m-6 3h6m0-10h.5m-.5 3h.5M7 7h3v3H7V7Z"/>
+				</svg>
+				Active Tasks
+				{% if (tasks | length > 0) %}
+					<h6>{{ tasks | length }}</h6>
+					{% if (tasks | length > 99) %}
+						<h6>99+</h6>
+					{% endif %}
+				{% endif %}
+			</a>
+			<a class="show-completed-task" title="Show completed tasks">
+				<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" viewBox="0 0 24 24">
+					<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8.032 12 1.984 1.984 4.96-4.96m4.55 5.272.893-.893a1.984 1.984 0 0 0 0-2.806l-.893-.893a1.984 1.984 0 0 1-.581-1.403V7.04a1.984 1.984 0 0 0-1.984-1.984h-1.262a1.983 1.983 0 0 1-1.403-.581l-.893-.893a1.984 1.984 0 0 0-2.806 0l-.893.893a1.984 1.984 0 0 1-1.403.581H7.04A1.984 1.984 0 0 0 5.055 7.04v1.262c0 .527-.209 1.031-.581 1.403l-.893.893a1.984 1.984 0 0 0 0 2.806l.893.893c.372.372.581.876.581 1.403v1.262a1.984 1.984 0 0 0 1.984 1.984h1.262c.527 0 1.031.209 1.403.581l.893.893a1.984 1.984 0 0 0 2.806 0l.893-.893a1.985 1.985 0 0 1 1.403-.581h1.262a1.984 1.984 0 0 0 1.984-1.984V15.7c0-.527.209-1.031.581-1.403Z"/>
+				</svg>
+				Completed Tasks
+				{% if (tasks_completed | length > 0) %}
+					<h6>{{ tasks_completed | length }}</h6>
+					{% if (tasks_completed | length > 99) %}
+						<h6>99+</h6>
+					{% endif %}
+				{% endif %}
+			</a>
+			<a href="{{ url_for('logout') }}" title="Logout">
+				<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" viewBox="0 0 24 24">
+					<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H8m12 0-4 4m4-4-4-4M9 4H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h2"/>
+				</svg>
+				Logout
+			</a>
+		</div>
+	</nav>
+
+	<div class="contents base">
+		<form class="add-task" method="POST">
+			<input id="content" type="text" name="content" title="Input your desire task" required>
+			<input type="submit" value="Add Task" title="Add and store the task">
+			<svg class="close-form-add-task" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" viewBox="0 0 24 24">
+				<title>Close the form</title>
+				<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 9-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+			</svg>
+		</form>
+
+		<div class="active-tasks active">
+			<div class="card-title">
+				<h1>Active Tasks</h1>
+				<div class="underline"></div>
+			</div>
+			{% if (tasks | length < 1) %}
+				<h1>
+					There is no task yet. Create one by clicking <input class="open-form-add-task" type="submit" value="this" title="Create a new task"> button.
+				</h1>
+			{% else %}
+				{% for task in tasks %}
+					<div class="card-task" data-id="{{ task.id }}" title="Click to edit and or see informations about the task">
+						{% if (task.content | length <= 150) %}
+							<h4>{{ task.content }}</h4>
+						{% else %}
+							<h4>{{ task.content[:150] }}...</h4>
+						{% endif %}
+
+						{% if (task.is_new) %}
+							<svg class="new-task-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" viewBox="0 0 24 24">
+								<title>New task</title>
+								<path fill="currentColor" d="M4 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4Z"/>
+								<text x="50%" y="60%" text-anchor="middle" fill="currentColor">NEW</text>
+							</svg>
+						{% endif %}
+
+						<svg class="complete-task-icon" data-id="{{ task.id }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" viewBox="0 0 24 24">
+							<title>Complete this task</title>
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8.032 12 1.984 1.984 4.96-4.96m4.55 5.272.893-.893a1.984 1.984 0 0 0 0-2.806l-.893-.893a1.984 1.984 0 0 1-.581-1.403V7.04a1.984 1.984 0 0 0-1.984-1.984h-1.262a1.983 1.983 0 0 1-1.403-.581l-.893-.893a1.984 1.984 0 0 0-2.806 0l-.893.893a1.984 1.984 0 0 1-1.403.581H7.04A1.984 1.984 0 0 0 5.055 7.04v1.262c0 .527-.209 1.031-.581 1.403l-.893.893a1.984 1.984 0 0 0 0 2.806l.893.893c.372.372.581.876.581 1.403v1.262a1.984 1.984 0 0 0 1.984 1.984h1.262c.527 0 1.031.209 1.403.581l.893.893a1.984 1.984 0 0 0 2.806 0l.893-.893a1.985 1.985 0 0 1 1.403-.581h1.262a1.984 1.984 0 0 0 1.984-1.984V15.7c0-.527.209-1.031.581-1.403Z"/>
+						</svg>
+					</div>
+				{% endfor %}
+				</table>
+			{% endif %}
+		</div>
+
+		<div class="completed-tasks">
+			<div class="card-title">
+				<h1>Completed Tasks</h1>
+				<div class="underline"></div>
+			</div>
+			{% if (tasks_completed | length < 1) %}
+				<h1>
+					There is no task completed yet.
+				</h1>
+			{% else %}
+				{% for task in tasks_completed %}
+					<div class="card-task card-task-completed" data-content="{{ task.content }}" data-created1="{{ task.date_created.strftime('%Y-%m-%d') }}" data-created2="{{ task.date_created.strftime('%H:%M') }}" data-completed1="{{ task.date_completed.strftime('%Y-%m-%d') }}" data-completed2="{{ task.date_completed.strftime('%H:%M') }}" title="Click to see the information for this task">
+						{% if (task.content | length <= 150) %}
+							<h4>{{ task.content }}</h4>
+						{% else %}
+							<h4>{{ task.content[:150] }}...</h4>
+						{% endif %}
+
+						<svg class="delete-task-icon" data-id="{{ task.id }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" viewBox="0 0 24 24">
+							<title>Delete this task record</title>
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+						</svg>
+					</div>
+				{% endfor %}
+				</table>
+			{% endif %}
+		</div>
+	</div>
+
+{% endblock %}

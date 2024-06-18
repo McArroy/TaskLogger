@@ -1,0 +1,66 @@
+{% extends "app.html" %}
+
+{% block title %}
+
+	<title>TaskLogger | Register</title>
+
+{% endblock %}
+
+{% block body %}
+
+	<div class="contents register">
+		<div class="card">
+			<div class="card-title">
+				<h1>Register</h1>
+				<div class="underline"></div>
+			</div>
+
+			<form method="POST">
+				{{ form.hidden_tag() }}
+
+				<div class="input">
+					<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 24 24">
+						<linearGradient id="myGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+							<stop offset="0%" style="stop-color:#7465aa; stop-opacity:1" />
+							<stop offset="25%" style="stop-color:#5875b6; stop-opacity:1" />
+							<stop offset="50%" style="stop-color:#3a83bb; stop-opacity:1" />
+							<stop offset="75%" style="stop-color:#248fb8; stop-opacity:1" />
+							<stop offset="100%" style="stop-color:#2999b1; stop-opacity:1" />
+						</linearGradient>
+						<path fill="url(#myGradient)" fill-rule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clip-rule="evenodd"/>
+					</svg>
+					{{ form.username(class="form-control") }}
+				</div>
+				<div class="input">
+					<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 24 24">
+						<linearGradient id="myGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+							<stop offset="0%" style="stop-color:#7465aa; stop-opacity:1" />
+							<stop offset="25%" style="stop-color:#5875b6; stop-opacity:1" />
+							<stop offset="50%" style="stop-color:#3a83bb; stop-opacity:1" />
+							<stop offset="75%" style="stop-color:#248fb8; stop-opacity:1" />
+							<stop offset="100%" style="stop-color:#2999b1; stop-opacity:1" />
+						</linearGradient>
+						<path fill="url(#myGradient)" fill-rule="evenodd" d="M8 10V7a4 4 0 1 1 8 0v3h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h1Zm2-3a2 2 0 1 1 4 0v3h-4V7Zm2 6a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0v-3a1 1 0 0 1 1-1Z" clip-rule="evenodd"/>
+					</svg>
+					{{ form.password1(class="form-control") }}
+				</div>
+				<div class="input">
+					<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 24 24">
+						<linearGradient id="myGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+							<stop offset="0%" style="stop-color:#7465aa; stop-opacity:1" />
+							<stop offset="25%" style="stop-color:#5875b6; stop-opacity:1" />
+							<stop offset="50%" style="stop-color:#3a83bb; stop-opacity:1" />
+							<stop offset="75%" style="stop-color:#248fb8; stop-opacity:1" />
+							<stop offset="100%" style="stop-color:#2999b1; stop-opacity:1" />
+						</linearGradient>
+						<path fill="url(#myGradient)" fill-rule="evenodd" d="M8 10V7a4 4 0 1 1 8 0v3h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h1Zm2-3a2 2 0 1 1 4 0v3h-4V7Zm2 6a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0v-3a1 1 0 0 1 1-1Z" clip-rule="evenodd"/>
+					</svg>
+					{{ form.password2(class="form-control") }}
+				</div>
+				{{ form.submit }}
+			</form>
+			<a href="{{ url_for('login') }}" title="Sign in using your existing account">Already have a account?</a>
+		</div>
+	</div>
+
+{% endblock %}

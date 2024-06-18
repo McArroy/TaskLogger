@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="{{ url_for('static', filename = 'locales/css/app.css') }}">
+		{% block title %}{% endblock %}
+
+		<!-- jQuery -->
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	</head>
+
+	<body>
+		{% block body %}{% endblock %}
+
+		<script>
+			$(document).ready(function()
+			{
+				$(document).on("click", function()
+				{
+					if (!$(event.target).closest("nav .right .menu-icon").length)
+						$("nav .menu").removeClass("active");
+				});
+	
+				$("nav .right .menu-icon").on("click", function()
+				{
+					$("nav .menu").toggleClass("active");
+				});
+	
+				$("nav .menu a.show-active-task").on("click", function()
+				{
+					if (!$(".contents .active-tasks").hasClass("active"))
+						$(".contents .active-tasks").addClass("active");
+					
+					if ($(".contents .completed-tasks").hasClass("active"))
+						$(".contents .completed-tasks").removeClass("active");
+				});
+	
+				$("nav .menu a.show-completed-task").on("click", function()
+				{
+					if ($(".contents .active-tasks").hasClass("active"))
+						$(".contents .active-tasks").removeClass("active");
+					
+					if (!$(".contents .completed-tasks").hasClass("active"))
+						$(".contents .completed-tasks").addClass("active");
+				});
+	
+				$(".contents h1 input.open-form-add-task, nav .menu a.open-form-add-task, .contents form.add-task svg.close-form-add-task").on("click", function()
+				{
+					$(".contents .add-task").toggleClass("active");
+				});
+
+				$(".contents .active-tasks .card-task").on("click", function()
+				{
+					window.location.href = "/edit/" + $(this).data("id");
+				});
+
+				$(".contents .active-tasks .card-task svg.complete-task-icon").on("click", function(event)
+				{
+					event.stopPropagation();
+
+					if (confirm("Are you sure to complete this task?\nClick \"OK\" to complete"))
+						window.location.href = "/complete/" + $(this).data("id");
+				});
+
+				$(".contents .completed-tasks .card-task-completed").on("click", function()
+				{
+					alert("Task: " + $(this).data("content") + "\nCreated in: " + $(this).data("created1") + " at: " + $(this).data("created2") + "\nCompleted in: " + $(this).data("completed1") + " at: " + $(this).data("completed2"));
+				});
+	
+				$(".contents .completed-tasks .card-task-completed svg.delete-task-icon").on("click", function(event)
+				{
+					event.stopPropagation();
+					
+					if (confirm("Are you sure to delete this task record?\nNOTE: This will delete the record permanently."))
+					{
+						if (confirm("Click \"OK\" to delete"))
+							window.location.href = "/delete/" + $(this).data("id");
+					}
+				});
+
+				$(".contents .card form .actions input[type='button']").on("click", function()
+				{
+					window.location.href = "/";
+				});
+			});
+		</script>
+	</body>
+</html>

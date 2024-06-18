@@ -1,0 +1,35 @@
+{% extends "app.html" %}
+
+{% block title %}
+
+	<title>TaskLogger | Edit</title>
+
+{% endblock %}
+
+{% block body %}
+
+	<div class="contents">
+		<div class="card">
+			<div class="card-title">
+				<h1>Edit Task</h1>
+				<div class="underline"></div>
+			</div>
+
+			<form action="/edit/{{ task.id }}" method="POST">
+				<textarea id="content" name="content" title="Current task's content. Change the text if you want to edit">{{ task.content }}</textarea>
+				<div class="informations">
+					<h4>
+						<b>Informations:</b><br>
+						Created in: <span>{{ task.date_created.strftime('%Y-%m-%d') }}</span> at <span>{{ task.date_created.strftime('%H:%M') }}</span><br>
+						Task completed: <span>{{ "Yes" if (task.is_completed) else "No" }}</span>
+					</h4>
+				</div>
+				<div class="actions">
+					<input type="button" value="Cancel" title="Cancel edit and go back to home">
+					<input type="submit" value="Save" title="Save edited task">
+				</div>
+			</form>
+		</div>
+	</div>
+
+{% endblock %}
