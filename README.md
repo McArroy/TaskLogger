@@ -1,11 +1,12 @@
 # TaskLogger
-This is a TaskLogger Project.
+A website to help people organize their tasks so they can be done better, see what tasks are incomplete, or remind them about them.
 
 ## What is this?
-This is a TaskLogger.
+TaskLogger is a website designed by IPB Vocational School Students from the Software Engineer Study Program with the aim to help people organize their tasks.
+This is done by helping them to organize their tasks so they can be done better, see what tasks are incomplete, or remind them about them.
 
 ## Goals of the project
-For future TaskLogger.
+Makes task organization more efficient and also provides a login session to make it easier for users to manage or view their tasks anywhere and anytime.
 
 ## Developer Informations
 ### Changelogs
