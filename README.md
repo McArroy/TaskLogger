@@ -16,6 +16,9 @@ These changelogs are basically just a summary list of changes that are very impo
 <details>
 <summary>Click to expand</summary>
 
+**[ HOSTING ]**
+- Enabled hosting's domain [tasklogger.pythonanywhere.com](https://tasklogger.pythonanywhere.com) and now is fully accessable
+
 **[ COMMONS ]**
 - Added documents for the project
 - Added logo image
@@ -24,6 +27,7 @@ These changelogs are basically just a summary list of changes that are very impo
 - Added alert css style
 - Added alert-message logic
 - Fixed bug validate-user and some alert-messages
+- Fixed bug database not loaded correctly in server-side
 
 </details>
 
