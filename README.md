@@ -19,10 +19,6 @@ These changelogs are basically just a summary list of changes that are very impo
 **[ HOSTING ]**
 - Enabled hosting's domain [tasklogger.pythonanywhere.com](https://tasklogger.pythonanywhere.com) and now is fully accessable
 
-**[ COMMONS ]**
-- Added documents for the project
-- Added logo image
-
 **[ FLASK ]**
 - Added alert css style
 - Added alert-message logic
