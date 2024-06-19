@@ -12,6 +12,21 @@ Makes task organization more efficient and also provides a login session to make
 ### Changelogs
 These changelogs are basically just a summary list of changes that are very important for developers information.
 
+#### UPDATE Version 1.0.3.7 [ Last update: 6/19/2024 ]
+<details>
+<summary>Click to expand</summary>
+
+**[ COMMONS ]**
+- Added documents for the project
+- Added logo image
+
+**[ FLASK ]**
+- Added alert css style
+- Added alert-message logic
+- Fixed bug validate-user and some alert-messages
+
+</details>
+
 #### UPDATE Version 1.0.2.5 [ Last update: 6/19/2024 ]
 <details>
 <summary>Click to expand</summary>
