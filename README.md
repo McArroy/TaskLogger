@@ -17,7 +17,7 @@ These changelogs are basically just a summary list of changes that are very impo
 <summary>Click to expand</summary>
 
 **[ HOSTING ]**
-- Enabled hosting's domain [tasklogger.pythonanywhere.com](https://tasklogger.pythonanywhere.com) and now is fully accessable
+- Enabled hosting's domain [tasklogger.pythonanywhere.com](https://tasklogger.pythonanywhere.com) and now is fully accessible
 
 **[ FLASK ]**
 - Added alert css style
