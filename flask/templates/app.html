@@ -11,16 +11,55 @@
 	</head>
 
 	<body>
+		{% with messages = get_flashed_messages(with_categories = true) %}
+			{% if (messages) %}
+				{% for category, message in messages %}
+					<div class="alert alert-{{ category }}">
+						<div class="contents">
+							{{ message }}
+							<a data-dismiss="alert" title="Close this notification">&times;</a>
+						</div>
+					</div>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+
 		{% block body %}{% endblock %}
 
 		<script>
 			$(document).ready(function()
 			{
+				const alerts = $(".alert");
+				let alertCurrentIndex = 0;
+
 				$(document).on("click", function()
 				{
 					if (!$(event.target).closest("nav .right .menu-icon").length)
 						$("nav .menu").removeClass("active");
 				});
+
+				function showAlert(index)
+				{
+					const $alert = $(alerts[index]);
+
+					$alert.addClass("fade-in");
+
+					function closeAlert()
+					{
+						$alert.removeClass("fade-in");
+						$alert.addClass("fade-out");
+						$alert.on("transitionend", function()
+						{
+							$alert.remove();
+							showAlert(index + 1);
+						});
+					}
+
+					$alert.find("[data-dismiss='alert']").on("click", closeAlert);
+					setTimeout(closeAlert, 5000);
+				}
+
+				showAlert(alertCurrentIndex);
 	
 				$("nav .right .menu-icon").on("click", function()
 				{
