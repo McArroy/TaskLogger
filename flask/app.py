@@ -31,7 +31,7 @@ database_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)), "databas
 os.makedirs(database_dir, exist_ok = True)
 
 app.config["SECRET_KEY"] = secrets.token_hex(16)
-app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{os.path.join(database_dir, "tasklogger.db")}"
+app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{os.path.join(database_dir, 'tasklogger.db')}"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
