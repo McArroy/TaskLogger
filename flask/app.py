@@ -61,11 +61,10 @@ class User(UserMixin, db.Model):
 		return bcrypt.check_password_hash(self.password_hash, attempted_password)
 
 class RegisterForm(FlaskForm):
-	def ValidateUsername(self, username_to_check):
+	def validate_username(self, username_to_check):
 		user = User.query.filter_by(username = username_to_check.data).first()
-
 		if (user):
-			raise ValidationError("Username is already exists!\nPlease try a different username")
+			raise ValidationError("Username is already exists! Please try a different username")
 
 	username = StringField(validators = [Length(min = 2, max = 40), DataRequired()], render_kw = {"placeholder": "Enter your username", "title": "Enter your username"})
 	password1 = PasswordField(validators = [Length(min = 8, max = 128), DataRequired()], render_kw = {"placeholder": "Enter your password", "title": "Enter your password"})
@@ -99,7 +98,7 @@ def register():
 		db.session.add(new_user)
 		db.session.commit()
 		login_user(new_user)
-		flash(f"Account created successfully!\n You are logged in as: {new_user.username}", category = "success")
+		flash(f"Account created successfully! You are logged in as: {new_user.username}", category = "success")
 		return redirect(url_for("index"))
 		
 	if (form.errors != {}):
@@ -116,10 +115,10 @@ def login():
 		attempted_user = User.query.filter_by(username = form.username.data).first()
 		if (attempted_user and attempted_user.check_password_correction(attempted_password = form.password.data)):
 			login_user(attempted_user)
-			flash(f"Success!\n You are logged in as: {attempted_user.username}", category = "success")
+			flash(f"Success! You are logged in as: {attempted_user.username}", category = "success")
 		return redirect(url_for("index"))
 	else:
-		flash("Username and password are not match!\n Please try again", category = "danger")
+		flash("Username and password are not match! Please try again", category = "danger")
 		
 	if (form.errors != {}):
 		for err_msg in form.errors.values():
